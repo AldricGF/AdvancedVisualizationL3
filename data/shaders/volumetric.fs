@@ -270,17 +270,17 @@ vec4 render_volumeV3() {
 		
 		//TF (Part 2)
         float depth = texture3D(u_texture, sample_position).x;
-		vec4 sample_color = vec4(0,0,0,0);
+		vec4 sample_color = vec4(0.0,0.0,0.0,0.0);
 		if(if_outside_of_plane(sample_position))
 		{
-			sample_color = vec4(0,0,0,0);
+			sample_color = vec4(0.0,0.0,0.0,0.0);
 		}
 		else
 		{
 			if (depth.x < 0.1) sample_color = vec4(0.0,0.0,0.0,0.0);
 			else
 			{
-				sample_color = texture2D(u_tf_texture, vec2(depth.x, 0.5));
+				sample_color = texture2D(u_tf_texture, vec2(depth.x, 0));
 				final_color = final_color + (u_step_size * (1.0 - final_color.a) * sample_color);
         		it_position = it_position + (ray_dir * u_step_size);
 			}
